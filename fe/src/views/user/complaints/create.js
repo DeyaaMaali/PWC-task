@@ -34,10 +34,7 @@ let messageTimeout = null;
 
 class complaintCreate extends React.Component {
   state = {
-    IsContra: false,
     alertShow: false,
-    CategoriesSelection: [],
-    CompNo: "",
   };
 
   changeInputField = (event) => {

@@ -21,12 +21,12 @@ exports.login = async (req, res) => {
 
     user.refreshToken = createRefreshToken(tokenPayload);
 
-    res.cookie("token", token, { httpOnly: true, secure: false, sameSite: true }); // secure should be true on production
+    res.cookie("token", token, { httpOnly: true, secure: false, sameSite: true }); // secure should be true on production; should be done by using env variable
 
     user.save(async (err, user) => {
       if (err) return res.send({ user, message: "refresh token not created", err });
 
-      res.cookie("refreshToken", user.refreshToken, { httpOnly: true, secure: false, sameSite: true }); // secure should be true on production
+      res.cookie("refreshToken", user.refreshToken, { httpOnly: true, secure: false, sameSite: true }); // secure should be true on production; should be done by using env variable
       res.send({ user, tokenExpiresIn: process.env.ACCESS_TOKEN_LIFE, success: true });
     });
   });

@@ -24,8 +24,8 @@ exports.store = async (req, res) => {
     };
     const token = createToken(tokenPayload);
 
-    res.cookie("token", token, { httpOnly: true, secure: false });
-    res.cookie("refreshToken", newUser.refreshToken, { httpOnly: true, secure: false });
+    res.cookie("token", token, { httpOnly: true, secure: false, sameSite: true });
+    res.cookie("refreshToken", newUser.refreshToken, { httpOnly: true, secure: false, sameSite: true }); // secure should be true on production; should be done by using env variable
 
     res.send({
       success: true,

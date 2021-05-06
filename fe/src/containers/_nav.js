@@ -2,7 +2,7 @@ export default [
   {
     _tag: "CSidebarNavTitle",
     _children: ["Complaints Section"],
-    permission: "order",
+    permission: "User",
   },
   {
     _tag: "CSidebarNavItem",
@@ -21,7 +21,7 @@ export default [
   {
     _tag: "CSidebarNavTitle",
     _children: ["Complaints Section"],
-    permission: "product",
+    permission: "Admin",
   },
   {
     _tag: "CSidebarNavItem",

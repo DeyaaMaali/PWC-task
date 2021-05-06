@@ -13,32 +13,6 @@ const loading = (
 );
 
 class TheContent extends React.Component {
-  state = {
-    userRouteBasedPermissions: [],
-  };
-  async componentDidMount() {
-    // const staffRequest = await Axios.get(`${BASE_EDPOINT}/api/admin/me`, {
-    //   headers: { authorization: this.props.token },
-    // });
-
-    // let userRoutePermissions = this.props.user.role.Permissions.map(
-    //   (permission) => permission.Name
-    // );
-
-    // let userRouteBasedPermissions = routes.reduce(
-    //   (permissionBasedRoute, item) => {
-    //     if (userRoutePermissions.includes(item.permission)) {
-    //       delete item.permission;
-    //       permissionBasedRoute.push(item);
-    //     }
-    //     return permissionBasedRoute;
-    //   },
-    //   []
-    // );
-
-    // this.setState({ userRouteBasedPermissions });
-    this.setState({ userRouteBasedPermissions: routes });
-  }
   render() {
     return (
       <main className="c-main">
@@ -46,7 +20,6 @@ class TheContent extends React.Component {
           <Suspense fallback={loading}>
             <Switch>
               {routes.map((route, idx) => {
-                // if (route.component && route.permission == this.props.user.role)
                 return (
                   route.component &&
                   (route.permission == this.props.user.role ||
@@ -75,7 +48,6 @@ class TheContent extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    // token: state.user.token,
     user: state.user.user,
   };
 };

@@ -11,8 +11,7 @@ import {
 import Select from "react-select";
 import { connect } from "react-redux";
 
-import Axios from "axios";
-import { BASE_EDPOINT } from "../../constants/constants";
+import { logoutUser } from "../../store/actions/user";
 
 let messageTimeout = null;
 
@@ -53,21 +52,6 @@ class allComplaints extends React.Component {
       pageNumber: this.state.pageNumber + 1,
     });
   }
-
-  resetPage = async () => {
-    const { token } = this.props;
-    const fetchProducts = await Axios.get(
-      `${BASE_EDPOINT}/api/products/pages/${this.state.pageNumber}/${this.state.pageSize}`,
-      { headers: { authorization: token } }
-    );
-
-    this.setState({
-      products: fetchProducts.data.products,
-      totalCounts: fetchProducts.data.totalCounts,
-      lastPage: !fetchProducts.data.haveMore,
-      pageNumber: this.state.pageNumber + 1,
-    });
-  };
 
   fetchNextPage = async (currentPageNumber) => {
     if (this.state.lastPage || currentPageNumber <= this.state.pageNumber) {
@@ -177,10 +161,16 @@ class allComplaints extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logoutUser: () => dispatch(logoutUser()),
+  };
+};
+
 const mapStateToProps = (state) => {
   return {
     user: state.user.user,
   };
 };
 
-export default connect(mapStateToProps)(allComplaints);
+export default connect(mapStateToProps, mapDispatchToProps)(allComplaints);

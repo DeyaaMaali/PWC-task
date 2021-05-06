@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const Users = require("../../models/Users");
 
 const verifyRefreshToken = async (req, res, next) => {
-  //   const token = req.headers["authorization"];
   const refreshToken = req.cookies["refreshToken"];
 
   if (!refreshToken) return res.status(401).send({ type: "refreshToken", success: false, message: "No refreshToken provided." });
